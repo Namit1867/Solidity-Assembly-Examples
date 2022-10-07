@@ -5,8 +5,8 @@ contract Add {
     function addAssembly(uint x, uint y) public pure returns (uint) {
         assembly {
             let result := add(x, y)
-            mstore(0x11, result)
-            return(0x11, 32)
+            mstore(0x0, result)
+            return(0x0, 32)
         }
     }
 
