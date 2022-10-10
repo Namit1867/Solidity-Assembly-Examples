@@ -28,5 +28,5 @@ describe("6. Modulo using Assembly and Normal Syntax :-", function () {
     );
   });
 
-  it("--------------------------------------------", async function () {});
+
 });

@@ -28,5 +28,5 @@ describe("4. Division using Assembly and Normal Syntax :-", function () {
     );
   });
 
-  it("--------------------------------------------", async function () {});
+
 });

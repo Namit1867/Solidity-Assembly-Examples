@@ -710,7 +710,6 @@ describe("15. Signed More Than using Assembly and Normal Syntax :-", function ()
     });
   });
 
-  it("--------------------------------------------", async function () {});
 });
 
 describe("16. Equality using Assembly and Normal Syntax :-", function () {
@@ -808,9 +807,200 @@ describe("17. IsZero using Assembly and Normal Syntax :-", function () {
 });
 
 
+describe("18. Bitwise And using Assembly and Normal Syntax :-", function () {
+  let andContractInstance: any;
+  let a = 2;
+  let b = 3;
+  let c = 2;
 
 
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
 
+  it("Should Deploy the contract", async function () {
+    const andContract = await ethers.getContractFactory("And");
+    andContractInstance = await andContract.deploy();
+  });
+
+  it("Should call Bitwise And using assembly", async function () {
+    expect(await andContractInstance.andAssembly(a, b)).to.equal(c);
+    assembly = Number(await andContractInstance.estimateGas.andAssembly(a, b))
+  });
+
+  it("Should call Bitwise And without assembly", async function () {
+    expect(await andContractInstance.andSolidity(a, b)).to.equal(c);
+    solidity = Number(await andContractInstance.estimateGas.andSolidity(a, b))
+
+    if(assembly < solidity){
+        difference = solidity - assembly;
+        differencePercentage = (difference / assembly) * 100;
+    }
+    else{
+        difference = assembly - solidity;
+        optimizeWay = "solidity";
+        differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+        "Operation":"Bitwise And",
+        "Assembly Logic Gas Cost":assembly,
+        "Solidity Logic Gas Cost":solidity,
+        "Gas Difference" : difference,
+        "Percentage":`${differencePercentage.toFixed(4)}% greater than ${optimizeWay}`
+    });
+  });
+
+});
+
+
+describe("19. Bitwise Or using Assembly and Normal Syntax :-", function () {
+    let orContractInstance: any;
+    let a = 2;
+    let b = 3;
+    let c = 3;
+  
+  
+    let assembly = 0;
+    let solidity = 0;
+    let difference = 0;
+    let differencePercentage = 0;
+    let optimizeWay = "Assembly";
+  
+    it("Should Deploy the contract", async function () {
+      const orContract = await ethers.getContractFactory("Or");
+      orContractInstance = await orContract.deploy();
+    });
+  
+    it("Should call Bitwise Or using assembly", async function () {
+      expect(await orContractInstance.orAssembly(a, b)).to.equal(c);
+      assembly = Number(await orContractInstance.estimateGas.orAssembly(a, b))
+    });
+  
+    it("Should call Bitwise Or without assembly", async function () {
+      expect(await orContractInstance.orSolidity(a, b)).to.equal(c);
+      solidity = Number(await orContractInstance.estimateGas.orSolidity(a, b))
+  
+      if(assembly < solidity){
+          difference = solidity - assembly;
+          differencePercentage = (difference / assembly) * 100;
+      }
+      else{
+          difference = assembly - solidity;
+          optimizeWay = "solidity";
+          differencePercentage = (difference / solidity) * 100;
+      }
+  
+      gasInfoArr.push({
+          "Operation":"Bitwise Or",
+          "Assembly Logic Gas Cost":assembly,
+          "Solidity Logic Gas Cost":solidity,
+          "Gas Difference" : difference,
+          "Percentage":`${differencePercentage.toFixed(4)}% greater than ${optimizeWay}`
+      });
+    });
+  
+  });
+
+
+  
+  describe("20. Bitwise Xor using Assembly and Normal Syntax :-", function () {
+    let xorContractInstance: any;
+    let a = 2;
+    let b = 3;
+    let c = 1;
+
+    let assembly = 0;
+    let solidity = 0;
+    let difference = 0;
+    let differencePercentage = 0;
+    let optimizeWay = "Assembly";
+  
+    it("Should Deploy the contract", async function () {
+      const xorContract = await ethers.getContractFactory("Xor");
+      xorContractInstance = await xorContract.deploy();
+    });
+  
+    it("Should call Bitwise Xor using assembly", async function () {
+      expect(await xorContractInstance.xorAssembly(a, b)).to.equal(c);
+      assembly = Number(await xorContractInstance.estimateGas.xorAssembly(a, b))
+    });
+  
+    it("Should call Bitwise Xor without assembly", async function () {
+      expect(await xorContractInstance.xorSolidity(a, b)).to.equal(c);
+      solidity = Number(await xorContractInstance.estimateGas.xorSolidity(a, b))
+
+      if(assembly < solidity){
+        difference = solidity - assembly;
+        differencePercentage = (difference / assembly) * 100;
+    }
+    else{
+        difference = assembly - solidity;
+        optimizeWay = "solidity";
+        differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+        "Operation":"Bitwise Xor",
+        "Assembly Logic Gas Cost":assembly,
+        "Solidity Logic Gas Cost":solidity,
+        "Gas Difference" : difference,
+        "Percentage":`${differencePercentage.toFixed(4)}% greater than ${optimizeWay}`
+    });
+
+    });
+  });
+
+describe("21. Bitwise Not using Assembly and Normal Syntax :-", function () {
+  let notContractInstance: any;
+  let a = "115792089237316195423570985008687907853269984665640564039457584007913129639927";
+  let c = 8;
+
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
+
+  it("Should Deploy the contract", async function () {
+    const notContract = await ethers.getContractFactory("Not");
+    notContractInstance = await notContract.deploy();
+  });
+
+  it("Should call Bitwise Not using assembly", async function () {
+    expect(await notContractInstance.notAssembly(a)).to.equal(c);
+    assembly = Number(await notContractInstance.estimateGas.notAssembly(a))
+  });
+
+  it("Should call Bitwise Not without assembly", async function () {
+    expect(await notContractInstance.notSolidity(a)).to.equal(c);
+    solidity = Number(await notContractInstance.estimateGas.notSolidity(a))
+
+    if(assembly < solidity){
+        difference = solidity - assembly;
+        differencePercentage = (difference / assembly) * 100;
+    }
+    else{
+        difference = assembly - solidity;
+        optimizeWay = "solidity";
+        differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+        "Operation":"Bitwise Not",
+        "Assembly Logic Gas Cost":assembly,
+        "Solidity Logic Gas Cost":solidity,
+        "Gas Difference" : difference,
+        "Percentage":`${differencePercentage.toFixed(4)}% greater than ${optimizeWay}`
+    });
+  });
+
+
+});
+
+  
 
 
 

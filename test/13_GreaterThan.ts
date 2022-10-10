@@ -28,5 +28,5 @@ describe("13. Greater Than using Assembly and Normal Syntax :-", function () {
     );
   });
 
-  it("--------------------------------------------", async function () {});
+
 });

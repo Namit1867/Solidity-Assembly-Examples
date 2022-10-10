@@ -28,5 +28,5 @@ describe("14. Signed Less Than using Assembly and Normal Syntax :-", function ()
     );
   });
 
-  it("--------------------------------------------", async function () {});
+
 });

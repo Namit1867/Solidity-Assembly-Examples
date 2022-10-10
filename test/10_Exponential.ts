@@ -28,5 +28,5 @@ describe("10. Exponential using Assembly and Normal Syntax :-", function () {
     );
   });
 
-  it("--------------------------------------------", async function () {});
+
 });

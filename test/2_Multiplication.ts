@@ -28,5 +28,5 @@ describe("2. Multiplication using Assembly and Normal Syntax :-", function () {
     );
   });
 
-  it("--------------------------------------------", async function () {});
+
 });

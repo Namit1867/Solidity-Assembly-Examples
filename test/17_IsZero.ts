@@ -27,5 +27,5 @@ describe("17. IsZero using Assembly and Normal Syntax :-", function () {
     );
   });
 
-  it("--------------------------------------------", async function () {});
+
 });

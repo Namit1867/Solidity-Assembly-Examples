@@ -28,5 +28,5 @@ describe("16. Equality using Assembly and Normal Syntax :-", function () {
     );
   });
 
-  it("--------------------------------------------", async function () {});
+
 });

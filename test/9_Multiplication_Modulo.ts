@@ -29,5 +29,5 @@ describe("9. Multiplication Modulo using Assembly and Normal Syntax :-", functio
     );
   });
 
-  it("--------------------------------------------", async function () {});
+
 });
