@@ -3,16 +3,16 @@ import { ethers } from "hardhat";
 import { ViewContractPrompt } from "hardhat-contract-prompts";
 
 async function temp() {
-  const SMod = await ethers.getContractFactory("SMod");
-  const smod = await SMod.deploy();
-  await smod.deployed();
+  const Slt = await ethers.getContractFactory("Slt");
+  const slt = await Slt.deploy();
+  await slt.deployed();
 
   const vcp = new ViewContractPrompt();
   vcp.Parser(undefined);
 
-  await vcp.prepare("SMod", "Signed Mod test prompts.");
+  await vcp.prepare("Slt", "Signed Less than test prompts.");
 
-  const res = await vcp.execute(smod);
+  const res = await vcp.execute(slt);
   console.log(res);
 }
 

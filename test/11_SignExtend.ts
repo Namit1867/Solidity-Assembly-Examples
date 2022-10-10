@@ -3,7 +3,7 @@ import { ethers } from "hardhat";
 
 //https://ethereum.stackexchange.com/questions/63062/evm-signextend-opcode-explanation
 
-describe("SignExternd using Assembly and Normal Syntax", function () {
+describe("11. SignExternd using Assembly and Normal Syntax :-", function () {
   let signExtendContractInstance: any;
   let a = 2;
   let b = 10;
@@ -15,10 +15,14 @@ describe("SignExternd using Assembly and Normal Syntax", function () {
   });
 
   it("Should call signExtend using assembly", async function () {
-    expect(await signExtendContractInstance.signExtendAssembly(a, b)).to.equal(c);
+    expect(await signExtendContractInstance.signExtendAssembly(a, b)).to.equal(
+      c
+    );
     console.log(
       "Assembly Gas Cost",
       await signExtendContractInstance.estimateGas.signExtendAssembly(a, b)
     );
   });
+
+  it("--------------------------------------------", async function () {});
 });

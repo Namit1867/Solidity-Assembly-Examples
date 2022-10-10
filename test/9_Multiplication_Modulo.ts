@@ -1,12 +1,12 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-describe("Multipliaction Modulo using Assembly and Normal Syntax", function () {
+describe("9. Multiplication Modulo using Assembly and Normal Syntax :-", function () {
   let mulModContractInstance: any;
   let a = 2;
   let b = 4;
   let c = 3;
-  let d = 2
+  let d = 2;
 
   it("Should Deploy the contract", async function () {
     const mulModContract = await ethers.getContractFactory("MulMod");
@@ -28,4 +28,6 @@ describe("Multipliaction Modulo using Assembly and Normal Syntax", function () {
       await mulModContractInstance.estimateGas.mulModSolidity(a, b, c)
     );
   });
+
+  it("--------------------------------------------", async function () {});
 });

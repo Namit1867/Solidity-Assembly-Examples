@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-describe("Modulo using Assembly and Normal Syntax", function () {
+describe("6. Modulo using Assembly and Normal Syntax :-", function () {
   let modContractInstance: any;
   let a = 5;
   let b = 3;
@@ -27,4 +27,6 @@ describe("Modulo using Assembly and Normal Syntax", function () {
       await modContractInstance.estimateGas.modSolidity(a, b)
     );
   });
+
+  it("--------------------------------------------", async function () {});
 });

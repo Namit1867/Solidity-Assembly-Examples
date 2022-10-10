@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-describe("Multiplication using Assembly and Normal Syntax", function () {
+describe("2. Multiplication using Assembly and Normal Syntax :-", function () {
   let mulContractInstance: any;
   let a = 3;
   let b = 2;
@@ -20,11 +20,13 @@ describe("Multiplication using Assembly and Normal Syntax", function () {
     );
   });
 
-  it("Should call multipliaction without assembly", async function () {
+  it("Should call multiplication without assembly", async function () {
     expect(await mulContractInstance.mulSolidity(a, b)).to.equal(c);
     console.log(
       "Normal Gas Cost",
       await mulContractInstance.estimateGas.mulSolidity(a, b)
     );
   });
+
+  it("--------------------------------------------", async function () {});
 });
