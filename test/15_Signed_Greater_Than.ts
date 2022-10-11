@@ -27,6 +27,4 @@ describe("15. Signed More Than using Assembly and Normal Syntax :-", function ()
       await signedMoreThanContractInstance.estimateGas.sgtSolidity(a, b)
     );
   });
-
-
 });

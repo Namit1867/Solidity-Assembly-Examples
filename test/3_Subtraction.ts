@@ -27,6 +27,4 @@ describe("3. Subtraction using Assembly and Normal Syntax :-", function () {
       await subContractInstance.estimateGas.subSolidity(a, b)
     );
   });
-
-
 });

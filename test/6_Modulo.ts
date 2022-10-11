@@ -27,6 +27,4 @@ describe("6. Modulo using Assembly and Normal Syntax :-", function () {
       await modContractInstance.estimateGas.modSolidity(a, b)
     );
   });
-
-
 });

@@ -27,6 +27,4 @@ describe("5. Signed Division using Assembly and Normal Syntax :-", function () {
       await sdivContractInstance.estimateGas.sdivSolidity(a, b)
     );
   });
-
-
 });

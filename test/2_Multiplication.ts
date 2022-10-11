@@ -27,6 +27,4 @@ describe("2. Multiplication using Assembly and Normal Syntax :-", function () {
       await mulContractInstance.estimateGas.mulSolidity(a, b)
     );
   });
-
-
 });

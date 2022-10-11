@@ -3,7 +3,8 @@ import { ethers } from "hardhat";
 
 describe("21. Bitwise Not using Assembly and Normal Syntax :-", function () {
   let notContractInstance: any;
-  let a = "115792089237316195423570985008687907853269984665640564039457584007913129639927";
+  let a =
+    "115792089237316195423570985008687907853269984665640564039457584007913129639927";
   let c = 8;
 
   it("Should Deploy the contract", async function () {
@@ -26,6 +27,4 @@ describe("21. Bitwise Not using Assembly and Normal Syntax :-", function () {
       await notContractInstance.estimateGas.notSolidity(a)
     );
   });
-
-
 });

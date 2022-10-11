@@ -28,6 +28,4 @@ describe("8. Addition Modulo using Assembly and Normal Syntax :-", function () {
       await addModContractInstance.estimateGas.addModSolidity(a, b, c)
     );
   });
-
-
 });

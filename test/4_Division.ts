@@ -27,6 +27,4 @@ describe("4. Division using Assembly and Normal Syntax :-", function () {
       await divContractInstance.estimateGas.divSolidity(a, b)
     );
   });
-
-
 });

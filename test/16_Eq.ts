@@ -27,6 +27,4 @@ describe("16. Equality using Assembly and Normal Syntax :-", function () {
       await eqContractInstance.estimateGas.eqSolidity(a, b)
     );
   });
-
-
 });

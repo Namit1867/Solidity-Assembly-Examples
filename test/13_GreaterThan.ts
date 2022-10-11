@@ -27,6 +27,4 @@ describe("13. Greater Than using Assembly and Normal Syntax :-", function () {
       await greaterThanContractInstance.estimateGas.gtSolidity(a, b)
     );
   });
-
-
 });

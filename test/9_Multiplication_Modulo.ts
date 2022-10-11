@@ -28,6 +28,4 @@ describe("9. Multiplication Modulo using Assembly and Normal Syntax :-", functio
       await mulModContractInstance.estimateGas.mulModSolidity(a, b, c)
     );
   });
-
-
 });

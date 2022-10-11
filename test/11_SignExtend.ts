@@ -23,6 +23,4 @@ describe("11. SignExternd using Assembly and Normal Syntax :-", function () {
       await signExtendContractInstance.estimateGas.signExtendAssembly(a, b)
     );
   });
-
-
 });

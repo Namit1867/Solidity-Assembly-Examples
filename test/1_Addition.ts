@@ -27,6 +27,4 @@ describe("1. Addition using Assembly and Normal Syntax :-", function () {
       await addContractInstance.estimateGas.addSolidity(a, b)
     );
   });
-
-
 });

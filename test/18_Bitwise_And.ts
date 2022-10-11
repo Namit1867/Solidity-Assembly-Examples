@@ -27,6 +27,4 @@ describe("18. Bitwise And using Assembly and Normal Syntax :-", function () {
       await andContractInstance.estimateGas.andSolidity(a, b)
     );
   });
-
-
 });

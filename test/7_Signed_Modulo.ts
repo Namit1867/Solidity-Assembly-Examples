@@ -27,6 +27,4 @@ describe("7. Signed Modulo using Assembly and Normal Syntax :-", function () {
       await smodContractInstance.estimateGas.smodSolidity(a, b)
     );
   });
-
-
 });

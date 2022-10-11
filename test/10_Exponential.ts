@@ -27,6 +27,4 @@ describe("10. Exponential using Assembly and Normal Syntax :-", function () {
       await expContractInstance.estimateGas.expSolidity(a, b)
     );
   });
-
-
 });
