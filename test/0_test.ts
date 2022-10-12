@@ -1346,6 +1346,107 @@ describe("27. Balance Of Account using Assembly and Normal Syntax :-", function 
   });
 });
 
+describe("28. TX Origin Address using Assembly and Normal Syntax :-", function () {
+  let originContractInstance: any;
+  let account: any;
+
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
+
+  it("Should Deploy the contract", async function () {
+    const originContract = await ethers.getContractFactory("Origin");
+    originContractInstance = await originContract.deploy();
+    [account] = await ethers.getSigners();
+  });
+
+  it("Should call Origin Operation using assembly", async function () {
+    expect(await originContractInstance.originAssembly()).to.equal(
+      account.address
+    );
+    assembly = Number(await originContractInstance.estimateGas.originAssembly())
+  });
+
+  it("Should call Origin Operation without assembly", async function () {
+    expect(await originContractInstance.originSolidity()).to.equal(
+      account.address
+    );
+    solidity = Number(await originContractInstance.estimateGas.originSolidity())
+
+    if (assembly < solidity) {
+      difference = solidity - assembly;
+      differencePercentage = (difference / assembly) * 100;
+    } else {
+      difference = assembly - solidity;
+      optimizeWay = "solidity";
+      differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+      Operation: "TX Origin Account",
+      "Assembly Logic Gas Cost": assembly,
+      "Solidity Logic Gas Cost": solidity,
+      "Gas Difference": difference,
+      Percentage: `${differencePercentage.toFixed(
+        4
+      )}% greater than ${optimizeWay}`,
+    });
+
+  });
+});
+
+describe("29. TX Caller Address using Assembly and Normal Syntax :-", function () {
+  let callerContractInstance: any;
+  let account: any;
+
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
+
+  it("Should Deploy the contract", async function () {
+    const callerContract = await ethers.getContractFactory("Caller");
+    callerContractInstance = await callerContract.deploy();
+    [account] = await ethers.getSigners();
+  });
+
+  it("Should call Caller Operation using assembly", async function () {
+    expect(await callerContractInstance.callerAssembly()).to.equal(
+      account.address
+    );
+    assembly = Number(await callerContractInstance.estimateGas.callerAssembly())
+  });
+
+  it("Should call Caller Operation without assembly", async function () {
+    expect(await callerContractInstance.callerSolidity()).to.equal(
+      account.address
+    );
+    solidity = Number(await callerContractInstance.estimateGas.callerSolidity())
+
+    if (assembly < solidity) {
+      difference = solidity - assembly;
+      differencePercentage = (difference / assembly) * 100;
+    } else {
+      difference = assembly - solidity;
+      optimizeWay = "solidity";
+      differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+      Operation: "msg.sender",
+      "Assembly Logic Gas Cost": assembly,
+      "Solidity Logic Gas Cost": solidity,
+      "Gas Difference": difference,
+      Percentage: `${differencePercentage.toFixed(
+        4
+      )}% greater than ${optimizeWay}`,
+    });
+  });
+});
+
 describe("Gas Comparison Between Assembly and Solidity Codes For Above Operations", function () {
   it("Console", async function () {
     console.table(gasInfoArr);
