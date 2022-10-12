@@ -1187,7 +1187,7 @@ describe("25. Signed Shift Right using Assembly and Normal Syntax :-", function 
 
   //b >> a
   //-7 = 1111111111111111111111111111111111111111111111111111111111111001 >> 1
-  //-4 = 0111111111111111111111111111111111111111111111111111111111111100 
+  //-4 = 0111111111111111111111111111111111111111111111111111111111111100
 
   let assembly = 0;
   let solidity = 0;
@@ -1201,13 +1201,21 @@ describe("25. Signed Shift Right using Assembly and Normal Syntax :-", function 
   });
 
   it("Should call Signed Right Shift using assembly", async function () {
-    expect(await signedShiftRightContractInstance.sarAssembly(a, b)).to.equal(c);
-    assembly = Number(await signedShiftRightContractInstance.estimateGas.sarAssembly(a, b))
+    expect(await signedShiftRightContractInstance.sarAssembly(a, b)).to.equal(
+      c
+    );
+    assembly = Number(
+      await signedShiftRightContractInstance.estimateGas.sarAssembly(a, b)
+    );
   });
 
   it("Should call Signed Right Shift without assembly", async function () {
-    expect(await signedShiftRightContractInstance.sarSolidity(a, b)).to.equal(c);
-    solidity = Number(await signedShiftRightContractInstance.estimateGas.sarSolidity(a, b))
+    expect(await signedShiftRightContractInstance.sarSolidity(a, b)).to.equal(
+      c
+    );
+    solidity = Number(
+      await signedShiftRightContractInstance.estimateGas.sarSolidity(a, b)
+    );
 
     if (assembly < solidity) {
       difference = solidity - assembly;
@@ -1220,6 +1228,114 @@ describe("25. Signed Shift Right using Assembly and Normal Syntax :-", function 
 
     gasInfoArr.push({
       Operation: "Signed Right Shift (>>)",
+      "Assembly Logic Gas Cost": assembly,
+      "Solidity Logic Gas Cost": solidity,
+      "Gas Difference": difference,
+      Percentage: `${differencePercentage.toFixed(
+        4
+      )}% greater than ${optimizeWay}`,
+    });
+  });
+});
+
+describe("26. Current Executing Contract Address using Assembly and Normal Syntax :-", function () {
+  let addressContractInstance: any;
+
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
+
+  it("Should Deploy the contract", async function () {
+    const addressContract = await ethers.getContractFactory("Address");
+    addressContractInstance = await addressContract.deploy();
+  });
+
+  it("Should call Address Operation using assembly", async function () {
+    expect(await addressContractInstance.addressAssembly()).to.equal(
+      addressContractInstance.address
+    );
+    assembly = Number(
+      await addressContractInstance.estimateGas.addressAssembly()
+    );
+  });
+
+  it("Should call Address Operation without assembly", async function () {
+    expect(await addressContractInstance.addressSolidity()).to.equal(
+      addressContractInstance.address
+    );
+    solidity = Number(
+      await addressContractInstance.estimateGas.addressSolidity()
+    );
+
+    if (assembly < solidity) {
+      difference = solidity - assembly;
+      differencePercentage = (difference / assembly) * 100;
+    } else {
+      difference = assembly - solidity;
+      optimizeWay = "solidity";
+      differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+      Operation: "Current Contract Address",
+      "Assembly Logic Gas Cost": assembly,
+      "Solidity Logic Gas Cost": solidity,
+      "Gas Difference": difference,
+      Percentage: `${differencePercentage.toFixed(
+        4
+      )}% greater than ${optimizeWay}`,
+    });
+  });
+});
+
+describe("27. Balance Of Account using Assembly and Normal Syntax :-", function () {
+  let balanceContractInstance: any;
+  let accountBalance: any = 0;
+  let account: any;
+
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
+
+  it("Should Deploy the contract", async function () {
+    const balanceContract = await ethers.getContractFactory("Balance");
+    balanceContractInstance = await balanceContract.deploy();
+    [account] = await ethers.getSigners();
+    accountBalance = await ethers.provider.getBalance(account.address);
+  });
+
+  it("Should call Balance Of Account Operation using assembly", async function () {
+    expect(
+      await balanceContractInstance.balanceAssembly(account.address)
+    ).to.equal(accountBalance);
+    assembly = Number(
+      await balanceContractInstance.estimateGas.balanceAssembly(account.address)
+    );
+  });
+
+  it("Should call Balance Of Account Operation without assembly", async function () {
+    expect(
+      await balanceContractInstance.balanceSolidity(account.address)
+    ).to.equal(accountBalance);
+    solidity = Number(
+      await balanceContractInstance.estimateGas.balanceSolidity(account.address)
+    );
+
+    if (assembly < solidity) {
+      difference = solidity - assembly;
+      differencePercentage = (difference / assembly) * 100;
+    } else {
+      difference = assembly - solidity;
+      optimizeWay = "solidity";
+      differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+      Operation: "Account Ether Balance",
       "Assembly Logic Gas Cost": assembly,
       "Solidity Logic Gas Cost": solidity,
       "Gas Difference": difference,

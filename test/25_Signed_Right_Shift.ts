@@ -9,7 +9,7 @@ describe("25. Signed Shift Right using Assembly and Normal Syntax :-", function 
 
   //b >> a
   //-7 = 1111111111111111111111111111111111111111111111111111111111111001 >> 1
-  //-4 = 0111111111111111111111111111111111111111111111111111111111111100 
+  //-4 = 0111111111111111111111111111111111111111111111111111111111111100
 
   it("Should Deploy the contract", async function () {
     const signedShiftRightContract = await ethers.getContractFactory("Sar");
@@ -17,7 +17,9 @@ describe("25. Signed Shift Right using Assembly and Normal Syntax :-", function 
   });
 
   it("Should call Signed Right Shift using assembly", async function () {
-    expect(await signedShiftRightContractInstance.sarAssembly(a, b)).to.equal(c);
+    expect(await signedShiftRightContractInstance.sarAssembly(a, b)).to.equal(
+      c
+    );
     console.log(
       "Assembly Gas Cost",
       await signedShiftRightContractInstance.estimateGas.sarAssembly(a, b)
@@ -25,7 +27,9 @@ describe("25. Signed Shift Right using Assembly and Normal Syntax :-", function 
   });
 
   it("Should call Signed Right Shift without assembly", async function () {
-    expect(await signedShiftRightContractInstance.sarSolidity(a, b)).to.equal(c);
+    expect(await signedShiftRightContractInstance.sarSolidity(a, b)).to.equal(
+      c
+    );
     console.log(
       "Normal Gas Cost",
       await signedShiftRightContractInstance.estimateGas.sarSolidity(a, b)
