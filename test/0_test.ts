@@ -1447,6 +1447,104 @@ describe("29. TX Caller Address using Assembly and Normal Syntax :-", function (
   });
 });
 
+describe("30. Call Value or msg.value using Assembly and Normal Syntax :-", function () {
+  let callValueContractInstance: any;
+  let weiToSend = ethers.utils.parseEther("1.0").toString();
+
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
+
+  it("Should Deploy the contract", async function () {
+    const callValueContract = await ethers.getContractFactory("CallValue");
+    callValueContractInstance = await callValueContract.deploy();
+  });
+
+  it("Should call Call Value Operation using assembly", async function () {
+    const receipt = await callValueContractInstance.callValueAssembly({value:weiToSend})
+    expect(weiToSend).to.equal(
+      receipt.value
+    );
+    assembly = Number(await callValueContractInstance.estimateGas.callValueAssembly({value:weiToSend}))
+  });
+
+  it("Should call msg.value Operation without assembly", async function () {
+    const receipt = await callValueContractInstance.callValueSolidity({value:weiToSend})
+    expect(receipt.value).to.equal(
+      weiToSend
+    );
+    solidity = Number(await callValueContractInstance.estimateGas.callValueSolidity({value:weiToSend}))
+
+    if (assembly < solidity) {
+      difference = solidity - assembly;
+      differencePercentage = (difference / assembly) * 100;
+    } else {
+      difference = assembly - solidity;
+      optimizeWay = "solidity";
+      differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+      Operation: "msg.value or callvalue",
+      "Assembly Logic Gas Cost": assembly,
+      "Solidity Logic Gas Cost": solidity,
+      "Gas Difference": difference,
+      Percentage: `${differencePercentage.toFixed(
+        4
+      )}% greater than ${optimizeWay}`,
+    });
+  });
+});
+
+describe("30. Call Data Load or Input values using Assembly and Normal Syntax :-", function () {
+  let callDataLoadContractInstance: any;
+  let a = 1;
+
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
+
+  it("Should Deploy the contract", async function () {
+    const callDataLoadContract = await ethers.getContractFactory("CalldataLoad");
+    callDataLoadContractInstance = await callDataLoadContract.deploy();
+  });
+
+  it("Should call Call Data Load Operation using assembly", async function () {
+    expect(await callDataLoadContractInstance.callDataLoadAssembly(a)).to.equal(a);
+    assembly = Number(await callDataLoadContractInstance.estimateGas.callDataLoadAssembly(a))
+  });
+
+  it("Should call msg.value Operation without assembly", async function () {
+    expect(await callDataLoadContractInstance.callDataLoadSolidity(a)).to.equal(
+      a
+    );
+    solidity = Number(await callDataLoadContractInstance.estimateGas.callDataLoadSolidity(a))
+
+    if (assembly < solidity) {
+      difference = solidity - assembly;
+      differencePercentage = (difference / assembly) * 100;
+    } else {
+      difference = assembly - solidity;
+      optimizeWay = "solidity";
+      differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+      Operation: "Call Data or Input Data",
+      "Assembly Logic Gas Cost": assembly,
+      "Solidity Logic Gas Cost": solidity,
+      "Gas Difference": difference,
+      Percentage: `${differencePercentage.toFixed(
+        4
+      )}% greater than ${optimizeWay}`,
+    });
+  });
+});
+
 describe("Gas Comparison Between Assembly and Solidity Codes For Above Operations", function () {
   it("Console", async function () {
     console.table(gasInfoArr);
