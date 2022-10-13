@@ -494,7 +494,7 @@ describe("10. Exponential using Assembly and Normal Syntax :-", function () {
 
 //https://ethereum.stackexchange.com/questions/63062/evm-signextend-opcode-explanation
 
-describe("11. SignExternd using Assembly and Normal Syntax :-", function () {
+describe("11. SignExtend using Assembly and Normal Syntax :-", function () {
   let signExtendContractInstance: any;
   let a = 2;
   let b = 10;
@@ -1541,6 +1541,40 @@ describe("30. Call Data Load or Input values using Assembly and Normal Syntax :-
       Percentage: `${differencePercentage.toFixed(
         4
       )}% greater than ${optimizeWay}`,
+    });
+  });
+});
+
+describe("32. CallDataSize using Assembly and Normal Syntax :-", function () {
+  let callDataSizeContractInstance: any;
+  let a = 2;
+  let b = 10;
+  let c = 64;
+
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
+
+
+  it("Should Deploy the contract", async function () {
+    const callDataSizeContract = await ethers.getContractFactory("CallDataSize");
+    callDataSizeContractInstance = await callDataSizeContract.deploy();
+  });
+
+  it("Should call Call Data Size using assembly", async function () {
+    expect(await callDataSizeContractInstance.callDataSizeAssembly(a, b)).to.equal(
+      c
+    );
+    assembly = Number(await callDataSizeContractInstance.estimateGas.callDataSizeAssembly(a, b))
+
+    gasInfoArr.push({
+      Operation: "Call Data Size (Input data Size)",
+      "Assembly Logic Gas Cost": assembly,
+      "Solidity Logic Gas Cost": "No Logic For Solidity",
+      "Gas Difference": 0,
+      Percentage: `${differencePercentage.toFixed(4)}%`,
     });
   });
 });
