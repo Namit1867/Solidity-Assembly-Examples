@@ -1498,7 +1498,7 @@ describe("30. Call Value or msg.value using Assembly and Normal Syntax :-", func
   });
 });
 
-describe("30. Call Data Load or Input values using Assembly and Normal Syntax :-", function () {
+describe("31. Call Data Load or Input values using Assembly and Normal Syntax :-", function () {
   let callDataLoadContractInstance: any;
   let a = 1;
 
@@ -1518,7 +1518,7 @@ describe("30. Call Data Load or Input values using Assembly and Normal Syntax :-
     assembly = Number(await callDataLoadContractInstance.estimateGas.callDataLoadAssembly(a))
   });
 
-  it("Should call msg.value Operation without assembly", async function () {
+  it("Should call Call Data Load Operation without assembly", async function () {
     expect(await callDataLoadContractInstance.callDataLoadSolidity(a)).to.equal(
       a
     );
@@ -1534,7 +1534,7 @@ describe("30. Call Data Load or Input values using Assembly and Normal Syntax :-
     }
 
     gasInfoArr.push({
-      Operation: "Call Data or Input Data",
+      Operation: "Call Data Load (Get Input Data)",
       "Assembly Logic Gas Cost": assembly,
       "Solidity Logic Gas Cost": solidity,
       "Gas Difference": difference,
@@ -1545,7 +1545,7 @@ describe("30. Call Data Load or Input values using Assembly and Normal Syntax :-
   });
 });
 
-describe("32. CallDataSize using Assembly and Normal Syntax :-", function () {
+describe("32. CallDataSize using Assembly :-", function () {
   let callDataSizeContractInstance: any;
   let a = 2;
   let b = 10;
@@ -1575,6 +1575,55 @@ describe("32. CallDataSize using Assembly and Normal Syntax :-", function () {
       "Solidity Logic Gas Cost": "No Logic For Solidity",
       "Gas Difference": 0,
       Percentage: `${differencePercentage.toFixed(4)}%`,
+    });
+  });
+});
+
+describe("33. Call Data Copy using Assembly and Normal Syntax :-", function () {
+  let callDataCopyContractInstance: any;
+  let a = 1;
+  let b = 2;
+  let c = 3; 
+
+  let assembly = 0;
+  let solidity = 0;
+  let difference = 0;
+  let differencePercentage = 0;
+  let optimizeWay = "Assembly";
+
+  it("Should Deploy the contract", async function () {
+    const callDataCopyContract = await ethers.getContractFactory("CallDataCopy");
+    callDataCopyContractInstance = await callDataCopyContract.deploy();
+  });
+
+  it("Should call Call Data Copy Operation using assembly", async function () {
+    expect(await callDataCopyContractInstance.callDataCopyAssembly(a,b)).to.equal(b);
+    assembly = Number(await callDataCopyContractInstance.estimateGas.callDataCopyAssembly(a,b))
+  });
+
+  it("Should call Call Data Copy Operation without assembly", async function () {
+    expect(await callDataCopyContractInstance.callDataCopySolidity(a,b)).to.equal(
+      b
+    );
+    solidity = Number(await callDataCopyContractInstance.estimateGas.callDataCopySolidity(a,b))
+
+    if (assembly < solidity) {
+      difference = solidity - assembly;
+      differencePercentage = (difference / assembly) * 100;
+    } else {
+      difference = assembly - solidity;
+      optimizeWay = "solidity";
+      differencePercentage = (difference / solidity) * 100;
+    }
+
+    gasInfoArr.push({
+      Operation: "Call Data Copy (Copy Input Data)",
+      "Assembly Logic Gas Cost": assembly,
+      "Solidity Logic Gas Cost": solidity,
+      "Gas Difference": difference,
+      Percentage: `${differencePercentage.toFixed(
+        4
+      )}% greater than ${optimizeWay}`,
     });
   });
 });
