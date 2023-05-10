@@ -1,13 +1,3 @@
-# Sample Hardhat Project
+Solidity is a high-level programming language that is commonly used to write smart contracts, and it also provides an assembly-like language called "Inline Assembly" for low-level operations.
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-GAS_REPORT=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
-```
+Assembly opcodes are low-level instructions that can be used to perform operations directly on the Ethereum Virtual Machine (EVM). This topic aims to showcase some examples of Solidity Inline Assembly opcodes and compare them to their equivalent implementations in Solidity. By doing so, it can help developers understand the benefits and drawbacks of using Inline Assembly, as well as when it is appropriate to use it instead of Solidity code.
